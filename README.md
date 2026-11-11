@@ -10,4 +10,4 @@ Apri index.html nel browser oppure pubblica i file su GitHub Pages.
 
 - Instagram: [@alessiocogonii](https://www.instagram.com/alessiocogonii/)
 - TikTok: [@_alessiocogoni](https://www.tiktok.com/@_alessiocogoni)
-- GitHub: [alessiocogoni/Cogoni](https://github.com/alessiocogoni/Cogoni)
+- GitHub: [alessiocogoni/Cogoni](https://github.com/alessiocogoni)
