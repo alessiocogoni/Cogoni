@@ -6,10 +6,8 @@ Sito portfolio statico, senza framework, dipendenze o script esterni.
 
 Apri index.html nel browser oppure pubblica i file su GitHub Pages.
 
-## Contatti e social
+## Social
 
-- Email: acogoni06@gmail.com
 - Instagram: [@alessiocogonii](https://www.instagram.com/alessiocogonii/)
 - TikTok: [@_alessiocogoni](https://www.tiktok.com/@_alessiocogoni)
 - GitHub: [alessiocogoni/Cogoni](https://github.com/alessiocogoni/Cogoni)
-
