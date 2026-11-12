@@ -169,6 +169,6 @@ document.getElementById('contactForm').addEventListener('submit', event => {
   const subject = document.getElementById('contactType').value;
   const body = `Ciao Alessio,\n\nsono ${name}.\n\n${message}\n\nA presto,\n${name}`;
   location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  status.textContent = 'Email preparata. Se il programma di posta non si apre, usa l’indirizzo indicato accanto.';
+  status.textContent = '';
 });
 document.getElementById('year').textContent = new Date().getFullYear();
