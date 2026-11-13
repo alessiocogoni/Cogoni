@@ -217,6 +217,8 @@
 <form id="contactForm">
 <label for="contactName">Come ti chiami?</label>
 <input id="contactName" name="name" autocomplete="name" required maxlength="100">
+<label for="contactEmail">La tua email</label>
+<input id="contactEmail" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="150">
 <label for="contactType">Di cosa hai bisogno?</label>
 <select id="contactType" name="type">
 <option>Un nuovo sito web</option>
@@ -227,9 +229,10 @@
 <label for="contactMessage">Raccontami la tua idea</label>
 <textarea id="contactMessage" name="message" rows="4" required maxlength="3000">
 </textarea>
-<button class="button button-orange" type="submit">Prepara la tua email
+<div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden"><label for="contactWebsite">Non compilare questo campo</label><input id="contactWebsite" name="_honey" tabindex="-1" autocomplete="off"></div>
+<button class="button button-orange" type="submit">Invia il messaggio
 </button>
-<p class="small-note">Si apre il tuo programma di posta con il messaggio pronto. Sarai tu a inviarlo.</p>
+<p class="small-note">Il messaggio arriva direttamente a me e ti rispondo all’email che inserisci.</p>
 <p id="contactStatus" role="status" class="small-note">
 </p>
 </form>

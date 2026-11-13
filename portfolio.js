@@ -147,18 +147,66 @@ dialog.addEventListener('close', () => {
 });
 
 const email = 'acogoni06@gmail.com';
-document.getElementById('contactForm').addEventListener('submit', event => {
+const contactForm = document.getElementById('contactForm');
+const contactStatus = document.getElementById('contactStatus');
+const contactEndpoint = `https://formsubmit.co/ajax/${email}`;
+
+function showContactStatus(text, withFallback = false) {
+  contactStatus.textContent = text;
+  if (!withFallback) return;
+  const link = document.createElement('a');
+  link.href = `mailto:${email}`;
+  link.textContent = email;
+  contactStatus.append(' Puoi scrivermi direttamente a ', link, ' oppure su WhatsApp.');
+}
+
+contactForm.addEventListener('submit', async event => {
   event.preventDefault();
   const name = document.getElementById('contactName').value.trim();
+  const sender = document.getElementById('contactEmail').value.trim();
   const message = document.getElementById('contactMessage').value.trim();
-  const status = document.getElementById('contactStatus');
+  const type = document.getElementById('contactType').value;
+  const button = contactForm.querySelector('button[type="submit"]');
+
   if (!name || !message) {
-    status.textContent = 'Inserisci il tuo nome e qualche dettaglio sul progetto.';
+    showContactStatus('Inserisci il tuo nome e qualche dettaglio sul progetto.');
     return;
   }
-  const subject = document.getElementById('contactType').value;
-  const body = `Ciao Alessio,\n\nsono ${name}.\n\n${message}\n\nA presto,\n${name}`;
-  location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  status.textContent = '';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) {
+    showContactStatus('Inserisci un indirizzo email valido, così posso risponderti.');
+    return;
+  }
+  // Campo trappola per i bot: una persona non lo vede e non lo compila.
+  if (document.getElementById('contactWebsite').value) {
+    contactForm.reset();
+    showContactStatus('Messaggio inviato. Grazie, ti rispondo presto.');
+    return;
+  }
+
+  button.disabled = true;
+  showContactStatus('Invio in corso…');
+  try {
+    const response = await fetch(contactEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        name,
+        email: sender,
+        richiesta: type,
+        message,
+        _subject: `Portfolio: ${type} da ${name}`,
+        _template: 'table',
+        _captcha: 'false'
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || String(result.success) !== 'true') throw new Error(result.message || 'Invio non riuscito');
+    contactForm.reset();
+    showContactStatus('Messaggio inviato. Grazie, ti rispondo presto.');
+  } catch (error) {
+    showContactStatus('Non sono riuscito a inviare il messaggio.', true);
+  } finally {
+    button.disabled = false;
+  }
 });
 document.getElementById('year').textContent = new Date().getFullYear();
