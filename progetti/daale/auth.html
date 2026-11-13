@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione & Accesso Clienti — Outlet DAALE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body x-data="authPage()">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-slate-950 via-rose-900 to-slate-950 text-white text-xs py-3 px-4 text-center tracking-wider font-extrabold border-b border-rose-500/30">
+        👟 CREA IL TUO ACCOUNT OUTLET DAALE CON GOOGLE, FACEBOOK O APPLE — CHECKOUT VELOCE E SCONTO -20% CON CODICE <span class="bg-rose-600 text-white px-2.5 py-1 rounded-full border border-rose-300 mx-1">ALE20</span>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="bg-gradient-to-br from-rose-600 to-red-800 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black shadow-lg border-2 border-rose-300">
+                    DA
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-tight text-slate-900 block leading-none">OUTLET DAALE</span>
+                    <span class="text-[10px] font-extrabold text-rose-600 tracking-widest uppercase block mt-1">Registrazione & Account Cliente</span>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="cat-btn !py-2.5 !px-5 !text-xs">
+                    <i class="fa-solid fa-arrow-left"></i> Torna al Catalogo Nike
+                </a>
+                <a href="cart.html" class="btn-primary !py-2.5 !px-5 !text-xs">
+                    <i class="fa-solid fa-bag-shopping text-rose-400"></i> Carrello
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12">
+
+        <!-- VISTA UTENTE AUTENTICATO (PROFILO CLIENTE) -->
+        <template x-if="currentUser">
+            <div class="bg-white rounded-[32px] border-2 border-slate-200 shadow-xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b-2 border-slate-100">
+                    <div class="flex items-center gap-5">
+                        <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-rose-600 to-slate-900 text-white flex items-center justify-center text-3xl font-black border-2 border-rose-300 shadow-lg" x-text="(currentUser.firstName ? currentUser.firstName[0] : 'U').toUpperCase()"></div>
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span x-text="'Account Verificato tramite ' + (currentUser.provider || 'Email')"></span>
+                            </div>
+                            <h1 class="text-3xl font-black text-slate-900" x-text="currentUser.firstName + ' ' + (currentUser.lastName || '')"></h1>
+                            <p class="text-sm font-bold text-slate-500" x-text="currentUser.email"></p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="index.html" class="btn-accent !py-3 !px-6 !text-xs">
+                            <i class="fa-solid fa-bag-shopping"></i> Vai allo Shopping Nike
+                        </a>
+                        <button @click="logout()" class="cat-btn !py-3 !px-5 !text-xs !border-rose-300 !text-rose-600">
+                            <i class="fa-solid fa-right-from-bracket"></i> Esci dall'Account
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6">
+                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-rose-600 mb-3">📍 Indirizzo Predefinito per il Checkout</h3>
+                        <p class="text-sm font-bold text-slate-800" x-text="currentUser.address ? (currentUser.address + ', ' + currentUser.city + ' (' + currentUser.zip + ')') : 'Indirizzo compilabile direttamente al Checkout'"></p>
+                        <p class="text-xs text-slate-500 mt-2">I tuoi dati vengono inseriti in automatico quando procedi all'ordine nel carrello.</p>
+                    </div>
+                    <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6">
+                        <h3 class="text-xs font-extrabold uppercase tracking-wider text-rose-600 mb-3">🎁 Vantaggio Account Registrato</h3>
+                        <p class="text-sm font-bold text-slate-800">Codice Sconto Attivo: <span class="bg-rose-600 text-white px-2.5 py-0.5 rounded-lg">ALE20</span> (-20%)</p>
+                        <p class="text-xs text-slate-500 mt-2">Ricezione automatica della ricevuta "Ordine Confermato" sulla tua email.</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- VISTA REGISTRAZIONE / LOGIN CON GOOGLE, FACEBOOK, APPLE E MODULO EMAIL -->
+        <template x-if="!currentUser">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Colonna Sinistra: Pulsanti Social Login (Google, Facebook, Apple) -->
+                <div class="lg:col-span-5 bg-white rounded-[32px] border-2 border-slate-200 p-8 shadow-xl">
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">Accesso Istantaneo 1-Click</span>
+                    <h2 class="text-2xl font-black text-slate-900 mt-3 mb-2">Registrati o Accedi con i Social</h2>
+                    <p class="text-xs font-semibold text-slate-500 mb-6">Usa il tuo account Google, Facebook o Apple per registrarti in un istante su Outlet DAALE.</p>
+
+                    <div class="space-y-3.5">
+                        <!-- Pulsante Ufficiale GOOGLE -->
+                        <button type="button" @click="openSocialPopup('Google')" class="btn-social-google">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24">
+                                <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.8C6.2 7.2 8.9 5 12 5z"/>
+                                <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6l3.7 2.9c2.2-2 3.7-5 3.7-8.7z"/>
+                                <path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9z"/>
+                                <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.9C3.5 21.4 7.4 24 12 24z"/>
+                            </svg>
+                            <span>Continua con Google</span>
+                        </button>
+
+                        <!-- Pulsante Ufficiale FACEBOOK -->
+                        <button type="button" @click="openSocialPopup('Facebook')" class="btn-social-facebook">
+                            <i class="fa-brands fa-facebook text-xl"></i>
+                            <span>Continua con Facebook</span>
+                        </button>
+
+                        <!-- Pulsante Ufficiale APPLE -->
+                        <button type="button" @click="openSocialPopup('Apple')" class="btn-social-apple">
+                            <i class="fa-brands fa-apple text-xl"></i>
+                            <span>Continua con Apple</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t-2 border-slate-100 space-y-2.5 text-xs text-slate-500 font-semibold">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                            <span>Autenticazione protetta e salvataggio automatico profilo</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-rose-600"></i>
+                            <span>Compilazione rapida dei dati di spedizione al checkout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonna Destra: Form Registrazione Completa / Login Email -->
+                <div class="lg:col-span-7 bg-white rounded-[32px] border-2 border-slate-200 p-8 shadow-xl">
+                    <!-- Switcher Registrati / Accedi -->
+                    <div class="flex gap-3 mb-7 pb-5 border-b-2 border-slate-100">
+                        <button type="button" @click="mode = 'register'; errorMessage = ''" :class="mode === 'register' ? 'btn-accent' : 'cat-btn'" class="flex-1 !py-3 !text-sm">
+                            <i class="fa-solid fa-user-plus"></i> Crea Nuovo Account
+                        </button>
+                        <button type="button" @click="mode = 'login'; errorMessage = ''" :class="mode === 'login' ? 'btn-accent' : 'cat-btn'" class="flex-1 !py-3 !text-sm">
+                            <i class="fa-solid fa-right-to-bracket"></i> Accedi con Email
+                        </button>
+                    </div>
+
+                    <!-- Messaggio di Errore -->
+                    <div x-show="errorMessage" class="mb-5 p-4 rounded-2xl bg-rose-50 border-2 border-rose-200 text-rose-700 text-xs font-extrabold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation text-base"></i>
+                        <span x-text="errorMessage"></span>
+                    </div>
+
+                    <!-- FORM 1: REGISTRAZIONE COMPLETA -->
+                    <form x-show="mode === 'register'" @submit.prevent="submitRegister()" class="space-y-4">
+                        <h3 class="text-xl font-black text-slate-900 mb-1">Modulo di Registrazione Cliente</h3>
+                        <p class="text-xs text-slate-500 mb-4">Compila i tuoi dati per creare un account ufficiale su Outlet DAALE.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Nome *</label>
+                                <input type="text" required x-model="regForm.firstName" placeholder="Mario" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Cognome *</label>
+                                <input type="text" required x-model="regForm.lastName" placeholder="Rossi" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Indirizzo Email *</label>
+                                <input type="email" required x-model="regForm.email" placeholder="mario.rossi@gmail.com" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Telefono</label>
+                                <input type="tel" x-model="regForm.phone" placeholder="+39 333 1234567" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Indirizzo di Spedizione (Via e Civico)</label>
+                            <input type="text" x-model="regForm.address" placeholder="Via Roma 10" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Città</label>
+                                <input type="text" x-model="regForm.city" placeholder="Milano" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">CAP</label>
+                                <input type="text" x-model="regForm.zip" placeholder="20121" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Crea una Password *</label>
+                            <input type="password" required minlength="4" x-model="regForm.password" placeholder="••••••••" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600">
+                        </div>
+
+                        <button type="submit" class="btn-accent w-full !py-4 !text-base mt-2">
+                            <i class="fa-solid fa-check-circle"></i> Completa Registrazione su Outlet DAALE
+                        </button>
+                    </form>
+
+                    <!-- FORM 2: LOGIN CON EMAIL E PASSWORD -->
+                    <form x-show="mode === 'login'" @submit.prevent="submitLogin()" class="space-y-5">
+                        <h3 class="text-xl font-black text-slate-900 mb-1">Accedi al tuo Account</h3>
+                        <p class="text-xs text-slate-500 mb-4">Inserisci la tua email e la password scelte in fase di registrazione.</p>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Indirizzo Email</label>
+                            <input type="email" required x-model="loginForm.email" placeholder="mario.rossi@gmail.com" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3.5 text-sm font-semibold outline-none focus:border-rose-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-500 mb-1.5">Password</label>
+                            <input type="password" required x-model="loginForm.password" placeholder="••••••••" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3.5 text-sm font-semibold outline-none focus:border-rose-600">
+                        </div>
+
+                        <button type="submit" class="btn-accent w-full !py-4 !text-base">
+                            <i class="fa-solid fa-right-to-bracket"></i> Accedi Ora
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </template>
+
+    </main>
+
+    <!-- MODALE INTERATTIVA OAUTH PER GOOGLE / FACEBOOK / APPLE -->
+    <div x-show="isSocialModalOpen" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div @click.outside="isSocialModalOpen = false" class="bg-white rounded-[32px] border-2 border-slate-200 max-w-md w-full p-8 shadow-2xl">
+            <div class="flex items-center justify-between pb-4 border-b-2 border-slate-100 mb-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl font-bold"
+                         :class="activeProvider === 'Google' ? 'bg-red-50 text-red-600 border border-red-200' : (activeProvider === 'Facebook' ? 'bg-blue-600 text-white' : 'bg-black text-white')">
+                        <i :class="activeProvider === 'Google' ? 'fa-brands fa-google' : (activeProvider === 'Facebook' ? 'fa-brands fa-facebook-f' : 'fa-brands fa-apple')"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Autenticazione Rapida</span>
+                        <h3 class="text-lg font-black text-slate-900" x-text="'Accedi con ' + activeProvider"></h3>
+                    </div>
+                </div>
+                <button @click="isSocialModalOpen = false" class="icon-btn w-9 h-9">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form @submit.prevent="confirmSocialLogin()" class="space-y-4">
+                <p class="text-xs text-slate-600 font-medium">
+                    Conferma i dati del tuo profilo <strong x-text="activeProvider"></strong> per collegarlo a <strong>Outlet DAALE</strong>:
+                </p>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1">Nome *</label>
+                        <input type="text" required x-model="socialForm.firstName" placeholder="Il tuo nome" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1">Cognome</label>
+                        <input type="text" x-model="socialForm.lastName" placeholder="Il tuo cognome" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1" x-text="'Email Account ' + activeProvider + ' *'"></label>
+                    <input type="email" required x-model="socialForm.email" :placeholder="activeProvider === 'Apple' ? 'nome@icloud.com' : 'nome@gmail.com'" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1">Indirizzo Spedizione (Opzionale)</label>
+                    <input type="text" x-model="socialForm.address" placeholder="Via e Numero Civico" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1">Città</label>
+                        <input type="text" x-model="socialForm.city" placeholder="Milano" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1">CAP</label>
+                        <input type="text" x-model="socialForm.zip" placeholder="20121" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold outline-none focus:border-rose-600">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-accent w-full !py-3.5 !text-sm mt-2">
+                    <i class="fa-solid fa-check"></i>
+                    <span x-text="'Continua come utente ' + activeProvider"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="demo-mode.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

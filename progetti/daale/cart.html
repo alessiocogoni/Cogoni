@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Tuo Carrello — Outlet DAALE Nike Edition</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body x-data="cartPage()">
+
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-rose-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black border-2 border-rose-300 shadow-md">DA</div>
+                <div>
+                    <span class="text-xl font-black text-slate-900 block leading-none">OUTLET DAALE</span>
+                    <span class="text-[10px] font-extrabold text-rose-600 uppercase tracking-widest">Riepilogo Carrello & Checkout Nike</span>
+                </div>
+            </a>
+            <a href="auth.html" class="cat-btn !py-2.5 !px-4 !text-xs"><i class="fa-solid fa-user text-rose-600"></i> <span x-text="currentUser ? currentUser.firstName : 'Accedi / Registrati'"></span></a>
+                <a href="index.html" class="cat-btn !py-2.5 !px-5 !text-xs">
+                <i class="fa-solid fa-arrow-left"></i> Continua lo Shopping
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-14">
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-8 flex items-center gap-3">
+            <i class="fa-solid fa-bag-shopping text-rose-600"></i> Articoli Nike nel Carrello (<span x-text="totalCartItems"></span>)
+        </h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10" x-show="cart.length > 0">
+            <!-- Lista Prodotti -->
+            <div class="lg:col-span-2 space-y-4">
+                <template x-for="item in cart" :key="item.cartId">
+                    <div class="bg-white rounded-[26px] border-2 border-slate-200 p-5 shadow-sm flex flex-col sm:flex-row items-center gap-6">
+                        <img :src="item.image" :alt="item.name" referrerpolicy="no-referrer" @error="$el.src = item.fallbackImage || item.image" class="w-28 h-24 object-contain bg-white p-1.5 rounded-2xl border border-slate-200">
+                        <div class="flex-grow text-center sm:text-left">
+                            <span class="text-[11px] font-extrabold text-rose-600 uppercase bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200" x-text="item.category"></span>
+                            <h3 class="font-extrabold text-slate-900 text-lg mt-1" x-text="item.name"></h3>
+                            <div class="text-xs text-slate-500 mt-1">Taglia selezionata: <strong class="text-slate-900" x-text="item.size"></strong></div>
+                            <div class="font-black text-slate-900 text-xl mt-2" x-text="'€ ' + (item.price * item.quantity).toFixed(2)"></div>
+                        </div>
+
+                        <!-- Pulsanti Quantità & Rimozione -->
+                        <div class="flex flex-col items-center sm:items-end gap-3">
+                            <button @click="removeFromCart(item.cartId)" class="icon-btn px-3 py-1.5 text-xs text-rose-600 border-rose-200 hover:bg-rose-50">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Rimuovi
+                            </button>
+                            <div class="inline-flex items-center gap-3 bg-slate-100 border-2 border-slate-200 rounded-2xl p-1.5">
+                                <button @click="updateQuantity(item.cartId, -1)" class="qty-btn !w-8 !h-8 !text-base">-</button>
+                                <span class="text-sm font-black w-5 text-center" x-text="item.quantity"></span>
+                                <button @click="updateQuantity(item.cartId, 1)" class="qty-btn !w-8 !h-8 !text-base">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Box Checkout -->
+            <div class="bg-white rounded-[28px] border-2 border-slate-200 p-7 shadow-xl h-fit">
+                <h3 class="text-xl font-black text-slate-900 mb-6 border-b-2 border-slate-100 pb-4">Totale Complessivo</h3>
+
+                <div class="mb-6 flex gap-2">
+                    <input type="text" x-model="promoInput" placeholder="Codice sconto (ALE20)" class="bg-slate-50 border-2 border-slate-300 text-sm rounded-2xl px-4 py-3 outline-none flex-grow uppercase font-bold">
+                    <button @click="applyPromo" class="btn-primary !py-3 !px-5 !text-xs">Applica</button>
+                </div>
+                <p x-show="promoMessage" class="text-xs font-extrabold mb-6" :class="discount > 0 ? 'text-emerald-600' : 'text-rose-600'" x-text="promoMessage"></p>
+
+                <div class="space-y-3 mb-6 text-sm font-semibold">
+                    <div class="flex justify-between text-slate-600">
+                        <span>Nome Ordine</span>
+                        <span class="font-extrabold text-slate-900 text-right max-w-[180px] truncate" x-text="previewOrderName"></span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>Subtotale articoli</span>
+                        <span class="font-bold text-slate-900" x-text="'€ ' + cartSubtotal.toFixed(2)"></span>
+                    </div>
+                    <div x-show="discount > 0" class="flex justify-between text-emerald-600">
+                        <span>Sconto Promo (-20%)</span>
+                        <span class="font-bold" x-text="'- € ' + discountAmount.toFixed(2)"></span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>Spedizione Rapida</span>
+                        <span class="font-bold text-emerald-600" x-text="shippingCost === 0 ? 'GRATUITA' : '€ ' + shippingCost.toFixed(2)"></span>
+                    </div>
+                    <div class="flex justify-between text-slate-900 text-2xl font-black pt-4 border-t-2 border-slate-100">
+                        <span>Totale</span>
+                        <span x-text="'€ ' + cartTotal.toFixed(2)"></span>
+                    </div>
+                </div>
+
+                <button @click="isCheckoutOpen = true" class="w-full btn-accent !py-4 !text-base">
+                    <span>Procedi al Checkout</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Carrello Vuoto -->
+        <div x-show="cart.length === 0 && !isOrderSuccessOpen" class="text-center py-24 bg-white rounded-[32px] border-2 border-slate-200 shadow-sm p-8">
+            <i class="fa-solid fa-bag-shopping text-6xl text-slate-300 mb-4"></i>
+            <h3 class="text-2xl font-black text-slate-800 mb-2">Il tuo carrello è vuoto</h3>
+            <p class="text-slate-500 text-sm mb-8">Scopri la nostra collezione Nike Outlet e aggiungi i tuoi articoli preferiti.</p>
+            <a href="index.html" class="btn-accent !px-8 !py-4">
+                <i class="fa-solid fa-compass"></i> Torna alla Vetrina Nike
+            </a>
+        </div>
+    </main>
+
+    <!-- Modale Checkout -->
+    <div x-show="isCheckoutOpen" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div @click.outside="isCheckoutOpen = false" class="bg-white rounded-[32px] border-2 border-slate-200 max-w-2xl w-full p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-5 border-b-2 border-slate-100 mb-6">
+                <div>
+                    <span class="text-xs font-extrabold uppercase text-rose-600 block" x-text="'Ordine Confermato - ' + previewOrderName"></span>
+                    <h2 class="text-2xl font-black text-slate-900">Dati di Spedizione & Pagamento</h2>
+                </div>
+                <button @click="isCheckoutOpen = false" class="icon-btn w-10 h-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form @submit.prevent="completeOrder" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Nome</label>
+                        <input type="text" required x-model="checkoutForm.firstName" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="Mario">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Cognome</label>
+                        <input type="text" required x-model="checkoutForm.lastName" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="Rossi">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Email per ricevere la conferma "Ordine Confermato"</label>
+                    <input type="email" required x-model="checkoutForm.email" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="mario.rossi@email.it">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Indirizzo Completo</label>
+                    <input type="text" required x-model="checkoutForm.address" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="Via Roma 123">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Città</label>
+                        <input type="text" required x-model="checkoutForm.city" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="Milano">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">CAP</label>
+                        <input type="text" required x-model="checkoutForm.zip" class="w-full bg-slate-50 border-2 border-slate-300 rounded-2xl px-4 py-3 text-sm font-semibold outline-none focus:border-rose-600" placeholder="20121">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-extrabold uppercase text-slate-500 mb-2">Metodo di Pagamento</label>
+                    <select x-model="checkoutForm.paymentMethod" class="styled-select w-full">
+                        <option value="Carta di Credito">💳 Carta di Credito / PostePay</option>
+                        <option value="PayPal">🅿️ PayPal</option>
+                        <option value="Contrassegno">📦 Contrassegno (Paga alla Consegna)</option>
+                    </select>
+                </div>
+
+                <div class="p-5 bg-rose-50 border-2 border-rose-200 rounded-2xl flex flex-wrap items-center justify-between gap-4 mt-6">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-rose-600 block">Totale da Confermare</span>
+                        <span class="text-2xl font-black text-slate-900" x-text="'€ ' + cartTotal.toFixed(2)"></span>
+                    </div>
+                    <p x-show="orderError" x-text="orderError" role="alert" class="text-red-700 font-bold"></p>
+                    <button type="submit" :disabled="isSubmitting" class="btn-accent !px-8 !py-4">
+                        <span x-text="isSubmitting ? 'Conferma in corso…' : 'Conferma Ordine'"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Schermata Ricevuta Ufficiale "Ordine Confermato - [Nome dell'Ordine]" -->
+    <div x-show="isOrderSuccessOpen" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-[32px] border-2 border-slate-200 max-w-lg w-full p-8 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 border-2 border-emerald-300">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="text-center mb-6">
+                <span class="text-[11px] font-extrabold uppercase tracking-widest bg-rose-100 text-rose-700 px-3 py-1 rounded-full">Mittente: Outlet DAALE</span>
+                <h2 class="text-2xl font-black text-slate-900 mt-3" x-text="lastSavedOrder ? ((lastSavedOrder.demo ? 'Simulazione ordine - ' : 'Ordine Confermato - ') + lastSavedOrder.orderName) : 'Ordine Confermato'"></h2>
+                <p class="text-xs font-bold text-slate-500 mt-1" x-text="lastSavedOrder ? ('Riferimento Ordine #' + lastSavedOrder.id) : ''"></p>
+            </div>
+
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 mb-4 text-xs space-y-2">
+                <div class="flex justify-between gap-2">
+                    <span class="text-slate-500 font-bold shrink-0">Oggetto conferma:</span>
+                    <span class="font-extrabold text-slate-900 text-right" x-text="lastSavedOrder ? lastSavedOrder.emailSubject : ''"></span>
+                </div>
+                <div class="flex justify-between gap-2">
+                    <span class="text-slate-500 font-bold shrink-0">Email cliente:</span>
+                    <span class="font-extrabold text-emerald-700 text-right" x-text="lastSavedOrder ? lastSavedOrder.customer.email : ''"></span>
+                </div>
+                <div class="flex justify-between gap-2">
+                    <span class="text-slate-500 font-bold shrink-0">Cliente:</span>
+                    <span class="font-bold text-slate-800 text-right" x-text="lastSavedOrder ? (lastSavedOrder.customer.firstName + ' ' + lastSavedOrder.customer.lastName) : ''"></span>
+                </div>
+                <div class="flex justify-between gap-2">
+                    <span class="text-slate-500 font-bold shrink-0">Totale ordine:</span>
+                    <span class="font-black text-rose-600 text-sm" x-text="lastSavedOrder ? ('€ ' + Number(lastSavedOrder.total).toFixed(2)) : ''"></span>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-300 text-amber-900 rounded-2xl p-3.5 mb-5 text-[11px] leading-relaxed font-semibold">
+                <span x-text="lastSavedOrder && lastSavedOrder.demo ? 'Versione dimostrativa: nessun ordine è stato inviato al negozio e nessuna email è stata spedita.' : lastSavedOrder && lastSavedOrder.emailSent ? 'Conferma affidata al servizio email. Controlla anche la posta indesiderata.' : 'Ordine registrato, ma la conferma email non è stata inviata. Conserva il numero ordine e contatta il negozio.'"></span>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <a :href="getMailtoUrl()" class="btn-primary w-full !py-3.5 !text-xs text-center">
+                    <i class="fa-solid fa-envelope"></i> Apri / Invia copia Email "Ordine Confermato"
+                </a>
+                <a href="index.html" class="btn-accent w-full !py-4 text-center">
+                    Torna al Negozio Outlet DAALE
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="demo-mode.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

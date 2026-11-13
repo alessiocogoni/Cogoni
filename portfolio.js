@@ -20,11 +20,11 @@ const projects = {
       ],
       [
         "Apri il progetto",
-        "Scopri gli obiettivi e le funzionalità del progetto nella scheda dedicata."
+        "Prova la demo online: usa dati di esempio e non invia nessuna richiesta."
       ]
     ],
-    "demo": "progetti/titina.html",
-    "demoLabel": "Scheda Casa Titina",
+    "demo": "progetti/titina/",
+    "demoLabel": "Apri la demo di Casa Titina",
     "action": "Parliamo di un sito per la tua attività"
   },
   "daale": {
@@ -46,11 +46,11 @@ const projects = {
       ],
       [
         "Apri il progetto",
-        "Scopri gli obiettivi e le funzionalità del progetto nella scheda dedicata."
+        "Prova la demo online: usa dati di esempio e non invia nessuna richiesta."
       ]
     ],
-    "demo": "progetti/daale.html",
-    "demoLabel": "Scheda Outlet DAALE",
+    "demo": "progetti/daale/",
+    "demoLabel": "Apri la demo di Outlet DAALE",
     "action": "Parliamo del tuo e-commerce"
   }
 };

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Articolo — Outlet DAALE Elite</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body x-data="productPage()">
+
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-rose-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-black border-2 border-rose-300 shadow-md">DA</div>
+                <div>
+                    <span class="text-xl font-black text-slate-900 block leading-none">OUTLET DAALE</span>
+                    <span class="text-[10px] font-extrabold text-rose-600 uppercase tracking-widest">Scheda Ufficiale Articolo</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-3">
+                <a href="auth.html" class="cat-btn !py-2.5 !px-4 !text-xs"><i class="fa-solid fa-user text-rose-600"></i> <span x-text="currentUser ? currentUser.firstName : 'Accedi / Registrati'"></span></a>
+                <a href="index.html" class="cat-btn !py-2.5 !px-5 !text-xs">
+                    <i class="fa-solid fa-arrow-left"></i> Torna al Catalogo
+                </a>
+                <a href="cart.html" class="btn-primary !py-2.5 !px-5 !text-xs">
+                    <i class="fa-solid fa-bag-shopping text-rose-400"></i> Vai al Carrello
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-14">
+        <template x-if="product">
+            <div class="bg-white rounded-[32px] border-2 border-slate-200 shadow-xl p-6 sm:p-10 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+                
+                <!-- Immagine Prodotto -->
+                <div class="md:col-span-5 bg-slate-100 rounded-[24px] overflow-hidden border-2 border-slate-200 h-[360px] relative">
+                    <img :src="product.image" :alt="product.name" referrerpolicy="no-referrer" @error="$el.src = product.fallbackImage || product.image" class="w-full h-full object-contain bg-white p-4">
+                    <span x-text="product.badge" class="badge-pill absolute top-4 left-4"></span>
+                </div>
+
+                <!-- Dettagli e Pulsanti Interattivi -->
+                <div class="md:col-span-7 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 inline-block mb-3" x-text="product.category"></span>
+                        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mb-4" x-text="product.name"></h1>
+                        
+                        <div class="flex items-center gap-4 mb-6 bg-slate-50 p-4 rounded-2xl border border-slate-200 w-fit">
+                            <span class="text-3xl font-black text-slate-900" x-text="'€ ' + product.price.toFixed(2)"></span>
+                            <span class="text-base text-slate-400 line-through font-bold" x-text="'€ ' + product.oldPrice.toFixed(2)"></span>
+                            <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">Disponibilità Immediata</span>
+                        </div>
+
+                        <p class="text-slate-600 text-base leading-relaxed mb-8" x-text="product.description"></p>
+
+                        <!-- Selezione Taglia con Pulsanti Stilizzati -->
+                        <div class="mb-7">
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-3">Seleziona la tua Taglia:</label>
+                            <div class="flex gap-3">
+                                <template x-for="size in availableSizes">
+                                    <button type="button" @click="selectedSize = size" :class="selectedSize === size ? 'active' : ''" class="size-btn" x-text="size"></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Selezione Quantità con Pulsanti Stilizzati -->
+                        <div class="mb-8">
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-3">Quantità:</label>
+                            <div class="inline-flex items-center gap-4 bg-slate-100 border-2 border-slate-200 rounded-2xl p-2">
+                                <button type="button" @click="if(quantity > 1) quantity--" class="qty-btn">-</button>
+                                <span class="font-black text-lg w-8 text-center" x-text="quantity"></span>
+                                <button type="button" @click="quantity++" class="qty-btn">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pulsanti Finali -->
+                    <div class="flex flex-wrap gap-4 pt-4 border-t-2 border-slate-100">
+                        <button type="button" @click="addToCart()" class="btn-accent flex-grow !py-4 !text-base">
+                            <i class="fa-solid fa-bag-shopping"></i> Aggiungi al Carrello e Acquista Ora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </main>
+
+    <script src="demo-mode.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

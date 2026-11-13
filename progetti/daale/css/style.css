@@ -1,0 +1,407 @@
+/* Da Ale Outlet Elite - Luxury Fashion Design System */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap');
+
+:root {
+    --bg-main: #f4f5f7;
+    --bg-card: #ffffff;
+    --dark: #0f172a;
+    --dark-2: #1e293b;
+    --red-primary: #e11d48;
+    --red-hover: #be123c;
+    --gold: #f59e0b;
+    --border-light: #e2e8f0;
+    --text-muted: #64748b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--dark);
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Titoli di Design Accattivanti */
+.font-display {
+    font-family: 'Playfair Display', serif;
+}
+
+.text-gradient-gold {
+    background: linear-gradient(135deg, #ffffff 0%, #fda4af 50%, #f43f5e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Header Glassmorphism */
+.glass-header {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 2px solid #e2e8f0;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+}
+
+/* Hero Section Scenografica */
+.hero-luxury {
+    background: radial-gradient(circle at 85% 20%, #4c0519 0%, #0f172a 55%, #020617 100%);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--red-primary);
+}
+
+/* ==========================================================================
+   SISTEMA UNIVERSALE DI PULSANTI (Bordi, Font, Border-Radius & Effetti)
+   ========================================================================== */
+
+button, a.btn-universal, .nav-pill, .cat-btn, .size-btn, .qty-btn, .icon-btn, select.styled-select {
+    font-family: 'Outfit', sans-serif !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    text-decoration: none;
+}
+
+/* 1. Pulsanti della Barra di Navigazione (Home, Collezione, Abbigliamento, Accessori, Scarpe) */
+.nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 9999px; /* Pillola perfetta */
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--dark);
+    background-color: #f8fafc;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+
+.nav-pill:hover, .nav-pill.active {
+    background: linear-gradient(135deg, var(--red-primary) 0%, #9f1239 100%);
+    color: #ffffff;
+    border-color: var(--red-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -4px rgba(225, 29, 72, 0.45);
+}
+
+/* 2. Pulsanti Filtro Categoria (Tutti, Abbigliamento, Accessori, Scarpe) */
+.cat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 26px;
+    border-radius: 18px; /* Border radius marcato ed elegante */
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    background-color: #ffffff;
+    color: var(--dark);
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+.cat-btn:hover {
+    border-color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+}
+
+.cat-btn.active {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    color: #ffffff;
+    border-color: var(--red-primary);
+    box-shadow: 0 10px 22px -4px rgba(15, 23, 42, 0.35);
+    transform: translateY(-2px);
+}
+
+.cat-btn.active i {
+    color: #fb7185;
+}
+
+/* 3. Menu a tendina Ordinamento (Select) */
+.styled-select {
+    padding: 12px 22px;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 0.92rem;
+    background-color: #ffffff;
+    color: var(--dark);
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    outline: none;
+}
+
+.styled-select:hover, .styled-select:focus {
+    border-color: var(--red-primary);
+    box-shadow: 0 8px 18px rgba(225, 29, 72, 0.15);
+}
+
+/* 4. Pulsanti Principali d'Azione (Esplora, Acquista, Dettagli, Checkout) */
+.btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    color: #ffffff !important;
+    border: 2px solid #fda4af;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    padding: 13px 24px;
+    box-shadow: 0 8px 20px -4px rgba(225, 29, 72, 0.45);
+}
+
+.btn-accent:hover {
+    background: linear-gradient(135deg, #be123c 0%, #881337 100%);
+    border-color: #ffffff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 26px -4px rgba(225, 29, 72, 0.6);
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff !important;
+    border: 2px solid #475569;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    padding: 13px 24px;
+    box-shadow: 0 8px 18px -4px rgba(15, 23, 42, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    border-color: #fda4af;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -4px rgba(225, 29, 72, 0.45);
+}
+
+.btn-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 13px 26px;
+}
+
+.btn-glass:hover {
+    background: #ffffff;
+    color: var(--dark) !important;
+    border-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.25);
+}
+
+/* 5. Pulsanti Taglia (S, M, L, XL) e Quantità (- / +) */
+.size-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: var(--dark);
+    border: 2px solid #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+}
+
+.size-btn:hover {
+    border-color: var(--dark);
+    transform: translateY(-2px);
+}
+
+.size-btn.active {
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    color: #ffffff;
+    border-color: #fda4af;
+    box-shadow: 0 8px 16px rgba(225, 29, 72, 0.35);
+    transform: translateY(-2px);
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background-color: #ffffff;
+    color: var(--dark);
+    border: 2px solid #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background-color: var(--red-primary);
+    color: #ffffff;
+    border-color: var(--red-primary);
+}
+
+/* 6. Pulsanti Icona (Cuore, Carrello, Indietro) */
+.icon-btn {
+    border-radius: 18px;
+    border: 2px solid #cbd5e1;
+    background-color: #ffffff;
+    color: var(--dark);
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.icon-btn:hover {
+    border-color: var(--red-primary);
+    color: var(--red-primary);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* ==========================================================================
+   CARD PRODOTTO ORDINATE E IMMAGINI PROPORZIONATE
+   ========================================================================== */
+
+.product-card {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 26px;
+    padding: 14px;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: #fda4af;
+    box-shadow: 0 22px 35px -8px rgba(225, 29, 72, 0.14);
+}
+
+.product-img-wrapper {
+    position: relative;
+    background-color: #f1f5f9;
+    height: 210px; /* Immagini compatte, ordinate e tutte identiche */
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.07);
+}
+
+.badge-pill {
+    background: linear-gradient(135deg, #e11d48 0%, #9f1239 100%);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(225, 29, 72, 0.35);
+}
+
+/* ==========================================================================
+   PULSANTI SOCIAL LOGIN UFFICIALI (GOOGLE, FACEBOOK, APPLE)
+   ========================================================================== */
+.btn-social-google {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 18px;
+    background-color: #ffffff;
+    color: #0f172a !important;
+    border: 2px solid #cbd5e1;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+.btn-social-google:hover {
+    border-color: #ea4335;
+    background-color: #fef2f2;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(234, 67, 53, 0.15);
+}
+
+.btn-social-facebook {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1877F2 0%, #0d5bd9 100%);
+    color: #ffffff !important;
+    border: 2px solid #60a5fa;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 16px rgba(24, 119, 242, 0.35);
+}
+.btn-social-facebook:hover {
+    background: linear-gradient(135deg, #166fe5 0%, #0a4ab8 100%);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(24, 119, 242, 0.5);
+}
+
+.btn-social-apple {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #000000 0%, #1e293b 100%);
+    color: #ffffff !important;
+    border: 2px solid #475569;
+    font-weight: 800;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.btn-social-apple:hover {
+    background: linear-gradient(135deg, #1e293b 0%, #000000 100%);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+}

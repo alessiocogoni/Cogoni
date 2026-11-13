@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Titina a Capoterra | Casa vacanze in Sardegna</title>
+  <meta name="description" content="Casa Titina a Capoterra: appartamento con una camera, giardino, terrazza, WiFi gratuito e aria condizionata. Richiedi disponibilità per il tuo soggiorno in Sardegna.">
+  <link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#1b4332"><script src="demo-api.js"></script></head>
+<body class="guest-site">
+  <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+  <!-- Barra di Navigazione -->
+  <nav class="navbar">
+    <a href="#" class="brand"><span class="brand-icon">t.</span><span>Titina<small>CASA VACANZE</small></span></a>
+    <div class="nav-links">
+      <a href="#stato-richiesta">La tua richiesta</a><a href="#galleria">La casa in foto</a><a href="#calendario">Il tuo soggiorno</a>
+      <a href="#prenota" class="guest-booking-link">Richiedi disponibilità</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="casa">
+    <div class="hero-copy"><p class="eyebrow">CASA TITINA · CAPOTERRA, SARDEGNA</p><h1>La tua pausa,<br>colore <em>Sardegna.</em></h1><p>A Capoterra, uno spazio tutto tuo tra giardino, terrazza e ambienti luminosi. Il piacere di sentirsi a casa, in Sardegna.</p><a class="btn-primary hero-cta" href="#prenota">Organizza il tuo soggiorno </a></div>
+    <div class="hero-mosaic"><a href="#galleria" class="mosaic-main"><img src="images/379714729.jpg" alt="Il soggiorno di Casa Titina" width="1024" height="683" fetchpriority="high"><span>Entra, sei in vacanza.</span></a><img class="mosaic-small" src="images/379714465.jpg" alt="La camera matrimoniale" width="1024" height="683"><img class="mosaic-small" src="images/379714674.jpg" alt="Il cortile della casa" width="1024" height="683"></div>
+  </header>
+  <div class="amenities"><span>Giardino e terrazza</span><span>WiFi gratuito</span><span>Aria condizionata</span><span>Cucina attrezzata</span></div>
+  <main class="container" id="contenuto"><section class="photo-section" id="galleria"><div class="section-heading"><div><p class="eyebrow">LA CASA</p><h2>Sentiti a casa.</h2></div><p>Una colazione con calma, la luce in camera, un caffè all’aperto. Scopri gli ambienti che ti aspettano.</p></div><div class="photo-grid"><button class="photo-tile" data-photo="0" aria-label="Ingrandisci: Il soggiorno"><img src="images/379714729.jpg" alt="Soggiorno con cucina a vista, travi bianche e divano azzurro" loading="lazy" decoding="async" width="1024" height="683"><span>Il soggiorno </span></button><button class="photo-tile" data-photo="1" aria-label="Ingrandisci: La camera"><img src="images/379714465.jpg" alt="Camera matrimoniale luminosa con dettagli naturali" loading="lazy" decoding="async" width="1024" height="683"><span>La camera </span></button><button class="photo-tile" data-photo="2" aria-label="Ingrandisci: Il cortile"><img src="images/379714674.jpg" alt="Cortile esterno con tavolino e piante" loading="lazy" decoding="async" width="1024" height="683"><span>Il cortile </span></button><button class="photo-tile" data-photo="3" aria-label="Ingrandisci: La cucina"><img src="images/379714534.jpg" alt="Cucina attrezzata con piano in legno" loading="lazy" decoding="async" width="1024" height="683"><span>La cucina </span></button><button class="photo-tile" data-photo="4" aria-label="Ingrandisci: Il bagno"><img src="images/379714631.jpg" alt="Bagno con lavabo e doccia" loading="lazy" decoding="async" width="1024" height="683"><span>Il bagno </span></button><button class="photo-tile" data-photo="5" aria-label="Ingrandisci: Il riposo"><img src="images/379714637.jpg" alt="Vista della camera matrimoniale" loading="lazy" decoding="async" width="1024" height="683"><span>Il riposo </span></button></div><button class="btn-outline gallery-all" data-photo="0">Guarda tutte le 12 foto</button></section>
+    
+
+
+    <div class="section-intro"><h2>Organizza il tuo soggiorno.</h2><p>Scegli le date e inviaci una richiesta.</p></div><div class="grid-layout">
+      <!-- Colonna Sinistra: Info & Calendario -->
+      <div>
+        <div class="card" id="calendario">
+          <p class="eyebrow">SCEGLI LE TUE DATE</p><div class="calendar-header">
+            <button aria-label="Mese precedente" id="prevMonthBtn" class="btn-outline">Indietro</button>
+            <h2 id="calendarMonthTitle" style="margin:0;">Calendario</h2>
+            <button aria-label="Mese successivo" id="nextMonthBtn" class="btn-outline">Avanti</button>
+          </div>
+          <p id="calendarSelection" class="calendar-selection" aria-live="polite">1. Scegli l’arrivo · 2. Scegli la partenza</p><div id="calendarGrid" class="calendar-grid"></div><div class="calendar-actions"><button id="clearDatesBtn" type="button" class="btn-outline" disabled>Cancella date</button><button id="retryCalendarBtn" type="button" class="btn-outline">Aggiorna disponibilità</button></div>
+          <div class="legend">
+            <span><i class="dot" style="background:#1b4332;"></i> Selezionato</span>
+            <span><i class="dot" style="background:#e6ecdd;"></i> Intervallo</span>
+            <span><i class="dot" style="background:#f6e9e0; border:1px solid #a25742;"></i> Occupato</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="eyebrow">BENVENUTI DA TITINA</p><h2>Lo spazio per stare bene.</h2>
+          <p>Una camera da letto, soggiorno con cucina attrezzata e bagno privato. All’esterno, giardino e terrazza per goderti i tuoi momenti di relax.</p>
+          <p style="margin-top:16px">WiFi, aria condizionata, biancheria, asciugamani e asciugacapelli a disposizione.</p>
+        </div>
+      </div>
+
+      <!-- Colonna Destra: Modulo Prenotazione & Preventivo -->
+      <div class="card" id="prenota">
+        <h2>Richiedi disponibilità.</h2><p class="rate"><strong>€155</strong> / notte · per 2 ospiti</p><p class="muted">Preventivo indicativo. Disponibilità e servizi da confermare.</p>
+        <form id="bookingForm">
+          <div class="form-row form-group">
+            <div>
+              <label for="checkIn">Check-in</label>
+              <input type="date" id="checkIn" required>
+            </div>
+            <div>
+              <label for="checkOut">Check-out</label>
+              <input type="date" id="checkOut" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Ospiti (massimo 4)</label>
+            <select id="guests">
+              <option value="1">1 Ospite · €60/notte</option>
+              <option value="2" selected>2 Ospiti · €155/notte</option>
+              <option value="3">3 Ospiti · €200/notte</option>
+              <option value="4">4 Ospiti · €250/notte</option>
+            </select>
+          </div>
+
+          <details class="optional-extras"><summary>Aggiungi servizi extra <span>Facoltativo</span></summary>
+          <div class="extras-list">
+            <label class="extra-item">
+              <span><input type="checkbox" class="extra-checkbox" value="breakfast"> Cesto Colazione Tipica</span>
+              <strong>+€15/notte</strong>
+            </label>
+            <label class="extra-item">
+              <span><input type="checkbox" class="extra-checkbox" value="ebike"> Noleggio 2 E-Bike</span>
+              <strong>+€40</strong>
+            </label>
+            <label class="extra-item">
+              <span><input type="checkbox" class="extra-checkbox" value="pets"> Supplemento Animali</span>
+              <strong>+€25</strong>
+            </label>
+          </div>
+
+          </details>
+
+          <div id="formMessage" role="status" aria-live="polite"></div><div id="priceSummary" class="price-box" role="status" aria-live="polite"></div>
+
+          <div class="form-group">
+            <label for="guestName">Nome e cognome</label>
+            <input type="text" maxlength="100" autocomplete="name" id="guestName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="guestEmail">Email</label>
+            <input type="email" autocomplete="email" id="guestEmail" required>
+          </div>
+
+          <button type="submit" class="btn-primary" disabled>Invia richiesta di disponibilità</button>
+        <p class="form-note">Ti risponderemo per confermare disponibilità e prezzo. L’invio della richiesta non conferma la prenotazione.</p></form>
+        <div id="voucherContainer" class="hidden" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <section class="card request-status" id="stato-richiesta"><p class="eyebrow">IL TUO SOGGIORNO</p><h2>Controlla la tua richiesta.</h2><p>Inserisci il codice ricevuto all’invio e la stessa email utilizzata nel modulo.</p><form id="statusForm"><label for="requestId">Codice richiesta</label><input id="requestId" required maxlength="100"><label for="requestEmail">Email</label><input id="requestEmail" type="email" required autocomplete="email"><button class="btn-primary">Controlla stato</button></form><div id="requestResult" role="status" aria-live="polite"></div></section>
+    <section id="posizione" class="location-section" aria-labelledby="locationTitle">
+      <div class="location-copy"><p class="eyebrow">CAPOTERRA · SUD SARDEGNA</p><h2 id="locationTitle">Una base per<br>scoprire l’isola.</h2><p><strong>Via Nazario Sauro 37, 09012 Capoterra</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Nazario%20Sauro%2037%2C%2009012%20Capoterra%2C%20Italia" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:4px">Apri su Google Maps</a></p><div class="transfer-note"><h3>Arrivi in aereo?</h3><p>L’aeroporto di Cagliari-Elmas si trova a 29 km. La struttura organizza una navetta aeroportuale a pagamento: contattaci per concordare disponibilità, orari e costo.</p><a href="https://wa.me/393421944222?text=Buongiorno%2C%20vorrei%20informazioni%20sulla%20navetta%20aeroportuale%20per%20Casa%20Titina." target="_blank" rel="noopener">Chiedi informazioni sulla navetta</a></div></div>
+      <dl class="distance-list"><div><dt>Sito archeologico di Nora</dt><dd>25 <span>km</span></dd></div><div><dt>Stazione ferroviaria di Cagliari</dt><dd>20 <span>km</span></dd></div><div><dt>Aeroporto di Cagliari-Elmas</dt><dd>29 <span>km</span></dd></div></dl>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#">Titina <small>CASA VACANZE</small></a><a class="footer-button location-button" href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Nazario%20Sauro%2037%2C%2009012%20Capoterra%2C%20Italia" target="_blank" rel="noopener noreferrer" aria-label="Apri su Google Maps: Via Nazario Sauro 37, 09012 Capoterra (nuova scheda)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span><strong>Dove siamo · Google Maps</strong><small>Via Nazario Sauro 37<br>09012 Capoterra</small></span></a><a class="footer-button whatsapp-button" href="https://wa.me/393421944222" target="_blank" rel="noopener noreferrer" aria-label="Scrivici su WhatsApp al 342 194 4222 (si apre in una nuova scheda)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a9 9 0 0 1-13.2 8L3 21l1.5-4.8A9 9 0 1 1 21 11.5Z"/><path d="M8 7.5c0 4.5 4 8.5 8.5 8.5l1-2.5-3-1-1 1c-1.5-.7-2.8-2-3.5-3.5l1-1-1-3Z"/></svg><span><strong>Scrivici su WhatsApp</strong><small>342 194 4222</small></span></a><a class="instagram-button" href="https://www.instagram.com/casatitinasardegna/" target="_blank" rel="noopener noreferrer" aria-label="Segui @casatitinasardegna su Instagram (si apre in una nuova scheda)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span><strong>Seguici su Instagram</strong><small>@casatitinasardegna</small></span></a><a class="footer-button tiktok-button" href="https://www.tiktok.com/@casatitinasardegna" target="_blank" rel="noopener noreferrer" aria-label="Segui @casatitinasardegna su TikTok (si apre in una nuova scheda)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v12.5a5.5 5.5 0 1 1-5-5.48V14a2 2 0 1 0 1.5 1.94V3h3.5c.5 3 2.3 4.8 5.5 5v3.5A9 9 0 0 1 14 9"/></svg><span><strong>Seguici su TikTok</strong><small>@casatitinasardegna</small></span></a><a class="footer-button booking-button" href="https://www.booking.com/hotel/it/casa-titina-capoterra.it.html" target="_blank" rel="noopener noreferrer" aria-label="Vedi Casa Titina su Booking.com (si apre in una nuova scheda)"><span class="booking-mark" aria-hidden="true">B.</span><span><strong>Casa Titina su Booking</strong><small>Scopri la struttura</small></span></a></footer>
+  <dialog id="photoDialog" aria-label="Galleria fotografica Casa Titina"><button id="closePhoto" class="light-close" aria-label="Chiudi galleria">Chiudi</button><img id="largePhoto" alt=""><div class="light-controls"><button id="previousPhoto" aria-label="Foto precedente">Precedente</button><p id="photoCaption" aria-live="polite"></p><button id="nextPhoto" aria-label="Foto successiva">Successiva</button></div></dialog><noscript><p class="card">Per usare il calendario abilita JavaScript, oppure <a href="https://wa.me/393421944222">contattaci su WhatsApp</a>.</p></noscript><script src="connection.js"></script><script src="gallery.js"></script>
+  <!-- Micro-file JavaScript collegati in ordine -->
+  <script src="config.js"></script>
+  <script src="storage.js"></script>
+  <script src="pricing.js"></script>
+  <script src="calendar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
