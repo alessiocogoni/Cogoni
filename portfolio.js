@@ -147,16 +147,6 @@ dialog.addEventListener('close', () => {
 });
 
 const email = 'acogoni06@gmail.com';
-document.getElementById('copyEmail').addEventListener('click', async () => {
-  const status = document.getElementById('copyStatus');
-  try {
-    await navigator.clipboard.writeText(email);
-    status.textContent = 'Indirizzo email copiato.';
-  } catch {
-    status.textContent = 'Copia non disponibile: riprova da un browser che consenta l’accesso agli appunti.';
-  }
-});
-
 document.getElementById('contactForm').addEventListener('submit', event => {
   event.preventDefault();
   const name = document.getElementById('contactName').value.trim();
