@@ -23,7 +23,7 @@ const projects = {
         "Scopri gli obiettivi e le funzionalità del progetto nella scheda dedicata."
       ]
     ],
-    "demo": "progetti/titina.html",
+    "demo": "https://casatitina.netlify.app/",
     "demoLabel": "Apri Casa Titina",
     "action": "Parliamo di un sito per la tua attività"
   },
@@ -50,7 +50,7 @@ const projects = {
       ]
     ],
     "demo": "progetti/daale.html",
-    "demoLabel": "Apri Outlet DAALE",
+    "demoLabel": "Scheda Outlet DAALE",
     "action": "Parliamo del tuo e-commerce"
   }
 };
@@ -153,7 +153,7 @@ document.getElementById('copyEmail').addEventListener('click', async () => {
     await navigator.clipboard.writeText(email);
     status.textContent = 'Indirizzo email copiato.';
   } catch {
-    status.textContent = 'Puoi selezionare e copiare l’indirizzo email qui sopra.';
+    status.textContent = 'Copia non disponibile: riprova da un browser che consenta l’accesso agli appunti.';
   }
 });
 
