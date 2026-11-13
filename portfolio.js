@@ -151,8 +151,9 @@ const contactForm = document.getElementById('contactForm');
 const contactStatus = document.getElementById('contactStatus');
 const contactEndpoint = `https://formsubmit.co/ajax/${email}`;
 
-function showContactStatus(text, withFallback = false) {
+function showContactStatus(text, withFallback = false, reason = '') {
   contactStatus.textContent = text;
+  if (reason) contactStatus.append(` (Motivo: ${reason}.)`);
   if (!withFallback) return;
   const link = document.createElement('a');
   link.href = `mailto:${email}`;
@@ -204,7 +205,11 @@ contactForm.addEventListener('submit', async event => {
     contactForm.reset();
     showContactStatus('Messaggio inviato. Grazie, ti rispondo presto.');
   } catch (error) {
-    showContactStatus('Non sono riuscito a inviare il messaggio.', true);
+    console.error('Invio modulo contatti non riuscito:', error);
+    const reason = error instanceof TypeError
+      ? 'il servizio di invio non è raggiungibile, forse bloccato dal browser o da un\u2019estensione'
+      : String(error.message || 'risposta non valida').slice(0, 200);
+    showContactStatus('Non sono riuscito a inviare il messaggio.', true, reason);
   } finally {
     button.disabled = false;
   }
