@@ -23,8 +23,8 @@ const projects = {
         "Scopri gli obiettivi e le funzionalità del progetto nella scheda dedicata."
       ]
     ],
-    "demo": "https://casatitina.netlify.app/",
-    "demoLabel": "Apri Casa Titina",
+    "demo": "progetti/titina.html",
+    "demoLabel": "Scheda Casa Titina",
     "action": "Parliamo di un sito per la tua attività"
   },
   "daale": {
