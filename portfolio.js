@@ -193,10 +193,11 @@ contactForm.addEventListener('submit', async event => {
       body: JSON.stringify({
         name,
         email: sender,
-        richiesta: type,
-        message,
-        _subject: `Portfolio: ${type} da ${name}`,
-        _template: 'table',
+        'Tipo di richiesta': type,
+        'Messaggio': message,
+        _subject: `Richiesta del progetto: ${type} - ${name}`,
+        _template: 'box',
+        _autoresponse: 'Grazie per il messaggio, ti rispondo entro 48 ore.',
         _captcha: 'false'
       })
     });
