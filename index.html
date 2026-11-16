@@ -8,6 +8,9 @@
 <title>Alessio Cogoni — Web Developer & Portfolio</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animazioni.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')</script>
+<script src="animazioni.js" defer></script>
 <script src="portfolio.js" defer>
 </script>
 <style>
@@ -56,7 +59,9 @@
 <div class="orbit orbit-two">
 </div>
 
-<div class="project-window">
+<div class="showcase" aria-roledescription="carosello" aria-label="Progetti in evidenza">
+<div class="showcase-stage">
+<a class="project-window showcase-card" data-demo="titina" data-name="Casa Titina" href="progetti/titina/" aria-label="Entra nel progetto Casa Titina">
 <div class="window-toolbar">
 <span class="window-dots" aria-hidden="true">
 </span>
@@ -73,6 +78,30 @@
 <span>01 / 02</span>
 </div>
 </div>
+</a>
+<a class="project-window showcase-card" data-demo="daale" data-name="Outlet DAALE" href="progetti/daale/" aria-label="Entra nel progetto Outlet DAALE">
+<div class="window-toolbar">
+<span class="window-dots" aria-hidden="true">
+</span>
+<span>outlet daale / progetto e-commerce</span>
+<span aria-hidden="true">+</span>
+</div>
+<div class="window-body">
+<div class="mini-brand">Outlet<span>E-COMMERCE</span>
+</div>
+<h2>Dalla scoperta<br>al carrello.</h2>
+<div class="window-visual" aria-hidden="true"><b>DAALE</b><i>OUTLET</i></div>
+<div class="window-bottom">
+<span>Catalogo, carrello e area di gestione.</span>
+<span>02 / 02</span>
+</div>
+</div>
+</a>
+</div>
+<div class="showcase-nav" role="group" aria-label="Scegli il progetto">
+<button type="button" class="showcase-dot is-active" data-go="0" aria-label="Mostra Casa Titina" aria-pressed="true"><span>Casa Titina</span></button>
+<button type="button" class="showcase-dot" data-go="1" aria-label="Mostra Outlet DAALE" aria-pressed="false"><span>Outlet DAALE</span></button>
+</div>
 </div>
 <div class="art-chip">
 <span class="chip-dot">
@@ -86,6 +115,7 @@
 
 </div>
 </section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Sviluppo web</span><span>Database</span><span>Software</span><span>Reti</span><span>E-commerce</span><span>Problem solving</span><span>Idea</span><span>Interfaccia</span><span>Esperienza</span><span>Sviluppo web</span><span>Database</span><span>Software</span><span>Reti</span><span>E-commerce</span><span>Problem solving</span><span>Idea</span><span>Interfaccia</span><span>Esperienza</span></div></div>
 <section class="work section" id="progetti">
 <div class="section-heading">
 <div>
