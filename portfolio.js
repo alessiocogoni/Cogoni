@@ -153,6 +153,7 @@ const contactEndpoint = `https://formsubmit.co/ajax/${email}`;
 
 function showContactStatus(text, withFallback = false, reason = '') {
   contactStatus.textContent = text;
+  contactStatus.dataset.state = withFallback ? 'error' : (text.startsWith('Messaggio inviato') ? 'ok' : 'info');
   if (reason) contactStatus.append(` (Motivo: ${reason}.)`);
   if (!withFallback) return;
   const link = document.createElement('a');
