@@ -99,9 +99,6 @@
 <button type="button" class="showcase-dot" data-go="1" aria-label="Mostra Outlet DAALE" aria-pressed="false"><span>Outlet DAALE</span></button>
 </div>
 </div>
-<div class="art-chip">
-<span class="chip-dot">
-</span>IDEA · INTERFACCIA · ESPERIENZA</div>
 </div>
 </div>
 <div class="hero-bottom">
@@ -232,39 +229,17 @@
 <em>Diamole forma.</em>
 </h2>
 <p>Raccontami cosa vuoi realizzare.<br>Iniziamo da una conversazione.</p>
-<ul class="contact-list">
-<li>
-<a class="contact-card contact-card-main" href="https://wa.me/393421944222" target="_blank" rel="noopener noreferrer">
-<span class="contact-card-label">WhatsApp</span>
-<span class="contact-card-value">Scrivimi un messaggio</span>
+<div class="contact-actions">
+<a class="button button-outline" href="https://wa.me/393421944222" target="_blank" rel="noopener noreferrer">WhatsApp
 </a>
-</li>
-<li>
-<a class="contact-card" href="tel:+393421944222">
-<span class="contact-card-label">Telefono</span>
-<span class="contact-card-value">+39 342 194 4222</span>
-</a>
-</li>
-<li>
-<div class="contact-card contact-card-static">
-<span class="contact-card-label">Tempi di risposta</span>
-<span class="contact-card-value">Entro 48 ore</span>
+<a class="phone-link" href="tel:+393421944222">+39 342 194 4222</a>
 </div>
-</li>
-</ul>
 </div>
 <form id="contactForm">
-<div class="form-row">
-<div class="field">
 <label for="contactName">Come ti chiami?</label>
-<input id="contactName" name="name" autocomplete="name" placeholder="Nome e cognome" required maxlength="100">
-</div>
-<div class="field">
+<input id="contactName" name="name" autocomplete="name" required maxlength="100">
 <label for="contactEmail">La tua email</label>
-<input id="contactEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@email.it" required maxlength="150">
-</div>
-</div>
-<div class="field">
+<input id="contactEmail" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="150">
 <label for="contactType">Di cosa hai bisogno?</label>
 <select id="contactType" name="type">
 <option>Un nuovo sito web</option>
@@ -272,11 +247,8 @@
 <option>Migliorare un progetto esistente</option>
 <option>Una collaborazione</option>
 </select>
-</div>
-<div class="field">
 <label for="contactMessage">Raccontami la tua idea</label>
-<textarea id="contactMessage" name="message" rows="5" placeholder="Descrivi in breve cosa vuoi realizzare" required maxlength="3000"></textarea>
-</div>
+<textarea id="contactMessage" name="message" rows="4" required maxlength="3000"></textarea>
 <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden"><label for="contactWebsite">Non compilare questo campo</label><input id="contactWebsite" name="_honey" tabindex="-1" autocomplete="off"></div>
 <button class="button button-orange" type="submit">Invia il messaggio</button>
 <p id="contactStatus" role="status" aria-live="polite"></p>

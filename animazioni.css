@@ -55,16 +55,12 @@
 
   /* Anteprima del progetto che fluttua, con orbite che girano */
   .showcase-stage { animation: float 7s ease-in-out infinite; translate: calc(var(--mx, 0) * -10px) calc(var(--my, 0) * -8px); }
-  .art-chip { animation: float-chip 5.5s ease-in-out infinite; translate: calc(var(--mx, 0) * 18px) calc(var(--my, 0) * 12px); }
   .orbit-one { animation: breathe 6s ease-in-out infinite; translate: calc(var(--mx, 0) * 14px) calc(var(--my, 0) * 10px); }
   .orbit-two { animation: spin 40s linear infinite; translate: calc(var(--mx, 0) * 24px) calc(var(--my, 0) * 16px); }
-  .showcase-stage, .art-chip, .orbit { transition: translate .5s var(--ease); }
+  .showcase-stage, .orbit { transition: translate .5s var(--ease); }
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-  @keyframes float-chip { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
   @keyframes breathe { 0%, 100% { scale: 1; opacity: .9; } 50% { scale: 1.06; opacity: .5; } }
   @keyframes spin { to { rotate: 360deg; } }
-  .chip-dot { animation: dot-pulse 1.8s ease-out infinite; }
-  @keyframes dot-pulse { 0% { box-shadow: 0 0 0 0 #45613d99; } 100% { box-shadow: 0 0 0 10px #45613d00; } }
 
   /* Il testo "Scorri per scoprire" invita a scendere */
   .hero-bottom a { animation: nudge 2.2s ease-in-out infinite; display: inline-block; }
@@ -139,7 +135,6 @@
 }
 .showcase-dot:hover { background: #ffffff26; transform: translateY(-1px); }
 .showcase-dot.is-active { background: linear-gradient(180deg, #f6976f, var(--orange-strong)); border-color: transparent; color: #1a1410; }
-.hero-art .art-chip { bottom: -4px; }
 
 /* Animazione di ingresso nel progetto */
 .enter-veil {
@@ -199,16 +194,12 @@ footer { background: linear-gradient(180deg, #14201a, #101a15); }
 @media (max-width: 400px) { .showcase { width: 78%; } }
 
 /* Correzioni: etichetta della vetrina e scorrimento orizzontale su telefono */
-.hero-art .art-chip { top: 34px; bottom: auto; left: -14px; right: auto; z-index: 7; }
 @media (max-width: 700px) {
   html.anim-ready .reveal-left, html.anim-ready .reveal-right { translate: 0 38px; }
   html.anim-ready .reveal.in { translate: 0 0; }
-  .hero-art .art-chip { top: auto; bottom: 0; left: 0; }
   .showcase-nav { bottom: -46px; }
 }
-.hero-art .art-chip { top: auto; bottom: -2px; left: -110px; }
-@media (max-width: 1000px) { .hero-art .art-chip { left: 0; bottom: -56px; } }
-@media (max-width: 700px) { .hero-art .art-chip { left: 0; bottom: -96px; } .hero-art { margin-bottom: 70px; } }
+@media (max-width: 700px) { .hero-art { margin-bottom: 70px; } }
 
 
 /* Senza JavaScript: una sola scheda, nessun pulsante inutile */
