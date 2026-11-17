@@ -187,7 +187,18 @@ contactForm.addEventListener('submit', async event => {
 
   button.disabled = true;
   showContactStatus('Invio in corso…');
-  try {
+
+  const dbUrl = (window.SUPABASE_URL || '').replace(/\/+$/, '');
+  const dbKey = window.SUPABASE_ANON_KEY || '';
+  const saveRequest = async () => {
+    const response = await fetch(`${dbUrl}/rest/v1/richieste`, {
+      method: 'POST',
+      headers: { apikey: dbKey, Authorization: `Bearer ${dbKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ nome: name, email: sender, tipo: type, messaggio: message })
+    });
+    if (!response.ok) throw new Error(`Salvataggio non riuscito (${response.status})`);
+  };
+  const emailRequest = async () => {
     const response = await fetch(contactEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -204,10 +215,19 @@ contactForm.addEventListener('submit', async event => {
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok || String(result.success) !== 'true') throw new Error(result.message || 'Invio non riuscito');
+  };
+
+  try {
+    // Se il database è configurato la richiesta viene salvata lì (area admin) e inviata anche per email:
+    // basta che uno dei due vada a buon fine perché il messaggio non vada perso.
+    const jobs = dbUrl && dbKey ? [saveRequest(), emailRequest()] : [emailRequest()];
+    const results = await Promise.allSettled(jobs);
+    const failed = results.filter(r => r.status === 'rejected');
+    failed.forEach(r => console.error('Invio modulo contatti, passaggio non riuscito:', r.reason));
+    if (failed.length === results.length) throw failed[0].reason;
     contactForm.reset();
     showContactStatus('Messaggio inviato. Grazie, ti rispondo presto.');
   } catch (error) {
-    console.error('Invio modulo contatti non riuscito:', error);
     const reason = error instanceof TypeError
       ? 'il servizio di invio non è raggiungibile, forse bloccato dal browser o da un\u2019estensione'
       : String(error.message || 'risposta non valida').slice(0, 200);
