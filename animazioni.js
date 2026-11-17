@@ -111,6 +111,7 @@
   const targets = [];
   groups.forEach(([selector, step, extra]) => {
     document.querySelectorAll(selector).forEach((el, i) => {
+      if (el.offsetParent === null && getComputedStyle(el).display === 'none') return; // elemento nascosto su questo schermo
       el.classList.add('reveal');
       if (extra) el.classList.add(extra);
       el.style.setProperty('--d', (i * step).toFixed(2) + 's');
