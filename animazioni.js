@@ -105,7 +105,8 @@
     ['.process-grid article', .14, ''],
     ['.social-card', .12, ''],
     ['.contact-intro', 0, 'reveal-left'],
-    ['.contact form', .15, 'reveal-right']
+    ['.contact form', .15, 'reveal-right'],
+    ['.contact-logo', .25, 'reveal-right']
   ];
   const targets = [];
   groups.forEach(([selector, step, extra]) => {
