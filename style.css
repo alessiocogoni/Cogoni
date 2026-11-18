@@ -373,13 +373,3 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .contact-actions .button { width: 100%; }
   .phone-link { text-align: center; }
 }
-
-/* Logo accanto al modulo (solo schermi larghi) */
-.contact-logo { display: none; }
-@media (min-width: 1001px) {
-  .contact { grid-template-columns: minmax(0, 760px) minmax(0, 1fr); column-gap: clamp(40px, 6vw, 110px); row-gap: 44px; }
-  .contact-intro { grid-column: 1; grid-row: 1; }
-  .contact form { grid-column: 1; grid-row: 2; }
-  .contact-logo { display: flex; grid-column: 2; grid-row: 1 / 3; align-self: center; justify-self: center; width: min(100%, 440px); filter: drop-shadow(0 30px 50px #00000055); }
-  .contact-logo svg { width: 100%; height: auto; display: block; }
-}
