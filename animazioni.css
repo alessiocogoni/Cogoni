@@ -218,3 +218,61 @@ footer { background: linear-gradient(180deg, #14201a, #101a15); }
 .hero h1 + .button { margin-top: 40px; }
 @media (max-width: 1000px) { .hero-grid { padding: 56px 0 72px; } }
 @media (max-width: 700px) { .hero-grid { padding: 40px 0 64px; gap: 36px; } }
+
+/* ==========================================================
+   Sfondo continuo a gradienti per tutta la pagina + bottoni verde menta
+   (in fondo al file: ha la precedenza sulle regole precedenti)
+   ========================================================== */
+:root { --mint: #7fe0b2; --mint-strong: #34b48a; --mint-ink: #0e2a1f; }
+body { background: #f3f1e6; }
+
+/* Dalla prima schermata scura, verso toni chiari, e di nuovo scuro nei contatti */
+.work {
+  padding-top: 150px;
+  background:
+    radial-gradient(ellipse 60% 40% at 88% 55%, #7fe0b230 0, transparent 70%),
+    linear-gradient(180deg, #192420 0, #2b4d3b 44px, #a9cdb6 104px, #e6f1e3 150px, #f3f1e6 58%, #e8f1e2 100%);
+}
+.about {
+  border-block: 0;
+  background:
+    radial-gradient(ellipse 45% 55% at 8% 30%, #7fe0b238 0, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 95% 85%, #f28c651c 0, transparent 70%),
+    linear-gradient(180deg, #e8f1e2 0, #d9ead9 100%);
+}
+.process {
+  background:
+    radial-gradient(ellipse 50% 45% at 90% 15%, #7fe0b233 0, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 5% 90%, #f28c6518 0, transparent 70%),
+    linear-gradient(180deg, #d9ead9 0, #eef1e3 55%, #e9f0e0 100%);
+}
+.social-section {
+  border-top: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 20%, #ffffff66 0, transparent 70%),
+    linear-gradient(180deg, #e9f0e0 0, #cfe4d3 58%, #8fbca3 80%, #3f6e57 92%, #1b2a23 100%);
+}
+.social-section .section-heading, .social-section .social-grid { position: relative; }
+.contact {
+  background:
+    radial-gradient(ellipse at 90% 0%, #2f5f48 0, transparent 52%),
+    radial-gradient(ellipse at 5% 70%, #22463546 0, transparent 55%),
+    linear-gradient(180deg, #1b2a23 0, #16231c 70%, #14201a 100%);
+}
+.process-grid article { background: linear-gradient(180deg, #ffffffee, #f4f8ef); }
+.process-grid article::before { background: linear-gradient(90deg, #34b48a, #7fe0b2, #cfeedd); }
+
+/* Bottoni: verde menta al posto dell'arancione */
+.button-orange, .topbar nav .nav-contact {
+  background: linear-gradient(135deg, var(--mint), var(--mint-strong)); color: var(--mint-ink);
+  box-shadow: 0 8px 22px #34b48a55;
+}
+.button-orange:hover, .topbar nav .nav-contact:hover {
+  background: linear-gradient(135deg, #a3efc9, #45c79b); color: var(--mint-ink);
+  box-shadow: 0 12px 30px #34b48a77;
+}
+.showcase .project-window::after { background: linear-gradient(135deg, var(--mint), var(--mint-strong)); color: var(--mint-ink); box-shadow: 0 10px 24px #34b48a66; }
+.showcase-dot.is-active { background: linear-gradient(135deg, var(--mint), var(--mint-strong)); color: var(--mint-ink); }
+.scroll-progress { background: linear-gradient(90deg, #34b48a, #7fe0b2 55%, #cfeedd); box-shadow: 0 0 12px #34b48aaa; }
+.contact input:focus, .contact select:focus, .contact textarea:focus { border-color: var(--mint); box-shadow: 0 0 0 4px #7fe0b233; }
+#contactStatus[data-state="ok"] { border-color: var(--mint); }
