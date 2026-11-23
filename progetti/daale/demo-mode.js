@@ -13,8 +13,25 @@
   const realFetch = window.fetch.bind(window);
   const PORTFOLIO_URL = '../../index.html#progetti';
 
+  // Inoltra al backend Python (se configurato) ordini e registrazioni fatti nella demo.
+  function forwardToBackend(url, init) {
+    if (!window.cogoniSend || !init || String(init.method || '').toUpperCase() !== 'POST') return;
+    let body;
+    try { body = JSON.parse(init.body); } catch (e) { return; }
+    if (!body || typeof body !== 'object') return;
+    if (url.startsWith('/api/orders')) {
+      const c = body.customer || {};
+      const name = c.name || c.fullName || [c.firstName, c.lastName].filter(Boolean).join(' ') || '';
+      window.cogoniSend('daale', 'ordine', Object.assign({ name: name, email: c.email || '' }, body),
+        (body.orderName || 'Ordine') + ' — totale € ' + body.total);
+    } else if (url.startsWith('/api/auth/register')) {
+      window.cogoniSend('daale', 'registrazione', { name: body.name || body.fullName || '', email: body.email || '' }, 'Nuova registrazione');
+    }
+  }
+
   window.fetch = function (input, init) {
     const url = typeof input === 'string' ? input : (input && input.url) || '';
+    forwardToBackend(url, init);
     if (url.startsWith('/api/') || url.includes('api.php') || url.includes('formsubmit.co')) {
       return Promise.resolve(
         new Response('{}', { status: 404, headers: { 'Content-Type': 'application/json' } })

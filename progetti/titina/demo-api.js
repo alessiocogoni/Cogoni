@@ -84,6 +84,10 @@
         checkIn: b.checkIn, checkOut: b.checkOut, guests: b.guests, total: quote.total, status: 'Da confermare'
       });
       save(list);
+      if (window.cogoniSend) window.cogoniSend('titina', 'prenotazione', {
+        id, name: b.guestName.trim(), email: b.guestEmail.trim(), checkIn: b.checkIn, checkOut: b.checkOut,
+        guests: b.guests, extras, total: quote.total, phone: b.guestPhone || '', notes: b.notes || b.message || ''
+      }, 'Richiesta di soggiorno ' + b.checkIn + ' → ' + b.checkOut + ' (' + b.guests + ' ospiti), totale € ' + quote.total);
       return json(201, { id, total: quote.total });
     }
 

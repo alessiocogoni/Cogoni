@@ -187,7 +187,16 @@ contactForm.addEventListener('submit', async event => {
 
   button.disabled = true;
   showContactStatus('Invio in corso…');
-  try {
+  const backendBase = String(window.COGONI_API || '').replace(/\/+$/, '');
+  const backendRequest = async () => {
+    const response = await fetch(`${backendBase}/api/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email: sender, type, message, _honey: '' })
+    });
+    if (!response.ok) throw new Error(`Salvataggio non riuscito (${response.status})`);
+  };
+  const emailRequest = async () => {
     const response = await fetch(contactEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -204,10 +213,18 @@ contactForm.addEventListener('submit', async event => {
     });
     const result = await response.json().catch(() => ({}));
     if (!response.ok || String(result.success) !== 'true') throw new Error(result.message || 'Invio non riuscito');
+  };
+
+  try {
+    // Salvataggio nel backend Python (se configurato) ed email: basta che uno riesca perché il messaggio non vada perso.
+    const jobs = backendBase ? [backendRequest(), emailRequest()] : [emailRequest()];
+    const results = await Promise.allSettled(jobs);
+    const failed = results.filter(r => r.status === 'rejected');
+    failed.forEach(r => console.error('Invio modulo contatti, passaggio non riuscito:', r.reason));
+    if (failed.length === results.length) throw failed[0].reason;
     contactForm.reset();
     showContactStatus('Messaggio inviato. Grazie, ti rispondo presto.');
   } catch (error) {
-    console.error('Invio modulo contatti non riuscito:', error);
     const reason = error instanceof TypeError
       ? 'il servizio di invio non è raggiungibile, forse bloccato dal browser o da un\u2019estensione'
       : String(error.message || 'risposta non valida').slice(0, 200);
