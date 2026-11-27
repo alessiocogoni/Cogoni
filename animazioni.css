@@ -314,3 +314,11 @@ body {
 footer { border-top: 1px solid #ffffff1c; }
 .scroll-progress { background: linear-gradient(90deg, #8f8cf0, #f4deae 60%, #fbeacb); box-shadow: 0 0 12px #c99d57aa; }
 .button-outline:hover, .about .text-link:hover { border-color: #f4deae99; }
+
+/* Third showcase project, same dimensions and interaction as the existing two. */
+.showcase .project-window[data-demo="ai-act"]{background:#F6F1FD;color:#30264C}
+.showcase [data-demo="ai-act"] .window-toolbar{border-color:#D9C9F8}
+.showcase [data-demo="ai-act"] .ai-preview{height:190px;display:flex;flex-direction:column;justify-content:center;box-shadow:none;background:linear-gradient(135deg,#E4EFFF,#D9C9F8)}
+.enter-veil.ai-act{background:linear-gradient(135deg,#30264C,#8063BE)}
+.showcase:not(.is-live) .showcase-card:not(:first-child){display:none}
+@media(max-width:760px){.showcase [data-demo="ai-act"] .ai-preview{height:150px;padding:12px}.showcase-nav{gap:5px}.showcase-dot{padding:0 10px;font-size:11px;white-space:nowrap}}
