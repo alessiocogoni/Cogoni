@@ -7,11 +7,11 @@
 <meta name="theme-color" content="#171919">
 <title>Alessio Cogoni — Web Developer & Portfolio</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="animazioni.css">
+<link rel="stylesheet" href="style.css?v=ai-act-portfolio">
+<link rel="stylesheet" href="animazioni.css?v=ai-act-portfolio">
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')</script>
 <script src="animazioni.js" defer></script>
-<script src="portfolio.js" defer>
+<script src="portfolio.js?v=ai-act-portfolio" defer>
 </script>
 <style>
 .social-grid {grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -49,7 +49,7 @@
 <a class="button button-orange" href="#progetti">Esplora i miei progetti
 </a>
 </div>
-<div class="hero-art" aria-label="Composizione grafica del progetto Casa Titina">
+<div class="hero-art" aria-label="Vetrina dei progetti in evidenza">
 <div class="orbit orbit-one">
 </div>
 <div class="orbit orbit-two">
@@ -71,7 +71,7 @@
 <img src="img/casa-titina-attuale.jpg" alt="Soggiorno di Casa Titina" width="640" height="420" fetchpriority="high">
 <div class="window-bottom">
 <span>Ospitalità, anche online.</span>
-<span>01 / 02</span>
+<span>01 / 03</span>
 </div>
 </div>
 </a>
@@ -89,14 +89,23 @@
 <div class="window-visual" aria-hidden="true"><b>DAALE</b><i>OUTLET</i></div>
 <div class="window-bottom">
 <span>Catalogo, carrello e area di gestione.</span>
-<span>02 / 02</span>
+<span>02 / 03</span>
 </div>
 </div>
 </a>
+<a class="project-window showcase-card" data-demo="ai-act" data-name="AI ACT" href="https://alessiocogoni.github.io/ai-act/" aria-label="Entra nel progetto AI ACT">
+<div class="window-toolbar"><span class="window-dots" aria-hidden="true"></span><span>ai act / web application</span><span aria-hidden="true">+</span></div>
+<div class="window-body">
+<div class="mini-brand">AI ACT<span>ARTIFICIAL INTELLIGENCE COMPLIANCE</span></div>
+<h2>La compliance<br>prende forma.</h2>
+<span class="ai-preview" aria-hidden="true"><span class="ai-preview-head"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 3l5.5 15.5L45 24l-15.5 5.5L24 45l-5.5-15.5L3 24l15.5-5.5L24 3Z"/><path d="M39 2v12M33 8h12M8 34v10m-5-5h10"/></svg><span>AI <b>ACT</b><small>ARTIFICIAL INTELLIGENCE COMPLIANCE</small></span></span><span class="ai-preview-grid"><span>Registro IA</span><span>Screening</span><span>Piano d’azione</span><span>Formazione</span></span></span>
+<div class="window-bottom"><span>Dalla normativa alle attività.</span><span>03 / 03</span></div>
+</div></a>
 </div>
 <div class="showcase-nav" role="group" aria-label="Scegli il progetto">
 <button type="button" class="showcase-dot is-active" data-go="0" aria-label="Mostra Casa Titina" aria-pressed="true"><span>Casa Titina</span></button>
 <button type="button" class="showcase-dot" data-go="1" aria-label="Mostra Outlet DAALE" aria-pressed="false"><span>Outlet DAALE</span></button>
+<button type="button" class="showcase-dot" data-go="2" aria-label="Mostra AI ACT" aria-pressed="false"><span>AI ACT</span></button>
 </div>
 </div>
 </div>
@@ -119,12 +128,13 @@
 </div>
 <div class="work-toolbar">
 <div class="filters" role="group" aria-label="Filtra i progetti">
-<button class="filter active" data-filter="all" aria-pressed="true">Tutti <span>02</span>
+<button class="filter active" data-filter="all" aria-pressed="true">Tutti <span>03</span>
 </button>
 <button class="filter" data-filter="web" aria-pressed="false">Siti web</button>
 <button class="filter" data-filter="commerce" aria-pressed="false">E-commerce</button>
+<button class="filter" data-filter="application" aria-pressed="false">Applicazioni web</button>
 </div>
-<p id="filterCount" role="status" aria-live="polite">2 progetti</p>
+<p id="filterCount" role="status" aria-live="polite">3 progetti</p>
 </div>
 <div class="project-grid">
 <article class="project" data-category="web">
@@ -163,7 +173,14 @@
 <span class="project-number">02</span>
 </div>
 </article>
-
+<article class="project" data-category="application">
+<button class="project-cover ai-act-cover" data-project="ai-act" aria-label="Scopri il progetto AI ACT">
+<span class="cover-label">COMPLIANCE / WEB APPLICATION</span>
+<span class="ai-preview" aria-hidden="true"><span class="ai-preview-head"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M24 3l5.5 15.5L45 24l-15.5 5.5L24 45l-5.5-15.5L3 24l15.5-5.5L24 3Z"/><path d="M39 2v12M33 8h12M8 34v10m-5-5h10"/></svg><span>AI <b>ACT</b><small>ARTIFICIAL INTELLIGENCE COMPLIANCE</small></span></span><span class="ai-preview-grid"><span>Registro IA</span><span>Screening</span><span>Piano d’azione</span><span>Formazione</span></span></span>
+<span class="cover-title">AI ACT<span>La gestione responsabile dell’IA.</span></span>
+</button>
+<div class="project-meta"><div><h3><button data-project="ai-act">AI ACT</button></h3><p>Registro IA, screening dei rischi e gestione degli adempimenti.</p></div><span class="project-number">03</span></div>
+</article>
 </div>
 </section>
 <section class="about section" id="profilo">
