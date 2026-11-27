@@ -52,6 +52,37 @@ const projects = {
     "demo": "progetti/daale/",
     "demoLabel": "Apri la demo di Outlet DAALE",
     "action": "Parliamo del tuo e-commerce"
+  },
+  "ai-act": {
+    "title": "AI ACT – Artificial Intelligence Compliance",
+    "category": "03 / COMPLIANCE & WEB APPLICATION",
+    "intro": "Un progetto personale per aiutare imprese e organizzazioni a strutturare il percorso di adeguamento al Regolamento europeo sull’intelligenza artificiale.",
+    "sections": [
+      [
+        "L’obiettivo",
+        "Tradurre gli adempimenti normativi e organizzativi in un percorso digitale accessibile e strutturato."
+      ],
+      [
+        "La piattaforma",
+        [
+          "Registro dei sistemi IA e gestione di più organizzazioni.",
+          "Screening orientativo di rischi, ruoli e obblighi.",
+          "Piano d’azione, scadenze, formazione e documentazione.",
+          "Guida locale con riferimenti alle fonti normative ufficiali."
+        ]
+      ],
+      [
+        "Tecnologie",
+        "HTML, CSS e JavaScript. La versione dimostrativa conserva i dati nel browser; il progetto comprende anche un backend Node.js con SQLite per la modalità gestita."
+      ],
+      [
+        "Apri il progetto",
+        "Accedi alla piattaforma dimostrativa in sviluppo. Usa dati di esempio, non informazioni aziendali riservate. La guida e gli screening non certificano la conformità né sostituiscono una valutazione legale."
+      ]
+    ],
+    "demo": "https://alessiocogoni.github.io/ai-act/",
+    "demoLabel": "Accedi alla piattaforma AI ACT",
+    "action": "Parliamo di una collaborazione"
   }
 };
 
