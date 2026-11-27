@@ -373,3 +373,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .contact-actions .button { width: 100%; }
   .phone-link { text-align: center; }
 }
+
+/* AI ACT: cover illustration based on the application's Digital Lavender palette. */
+.ai-act-cover{background:linear-gradient(145deg,#E4EFFF,#D9C9F8);color:#30264C}
+.ai-act-cover::after{background:linear-gradient(180deg,transparent 68%,#8063BE18)}
+.ai-preview{display:block;background:linear-gradient(145deg,#F3F7FF,#F6F1FD);color:#30264C;border:1px solid #D9C9F8;border-radius:16px;padding:16px;box-shadow:0 12px 35px #30264C18;overflow:hidden;box-sizing:border-box}
+.ai-preview-head{display:flex;align-items:center;gap:10px;font:800 26px/1 system-ui,sans-serif;letter-spacing:-1px}
+.ai-preview-head svg{width:34px;height:34px;flex:none;color:#30264C}
+.ai-preview-head b{color:#8063BE}.ai-preview-head small{display:block;font:600 8px/1.4 system-ui,sans-serif;letter-spacing:.3px;margin-top:5px;color:#66509E}
+.ai-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:14px}
+.ai-preview-grid>span{background:#fff;border:1px solid #E3D9F2;border-radius:7px;padding:10px 7px;font:600 10px/1.2 system-ui,sans-serif;color:#66509E;white-space:normal}
+.ai-act-cover>.ai-preview{position:absolute;top:65px;left:12%;right:12%;max-width:420px;margin:auto;transform:rotate(-3deg);transition:transform .35s}
+.ai-act-cover:hover>.ai-preview{transform:rotate(0)}
+.ai-act-cover .cover-title{color:#30264C}
+@media(max-width:480px){.ai-act-cover>.ai-preview{left:8%;right:8%;top:60px}.ai-preview-head{font-size:23px}.ai-act-cover .cover-title{bottom:25px}}
